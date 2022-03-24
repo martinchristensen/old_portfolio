@@ -1,0 +1,38 @@
+.codeBox {
+    position: relative;
+    height: 400px;
+}
+
+.btnLang {
+    float: left;
+    height: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #E1E1E1;
+    color: #123856;
+    border: none;
+}
+
+.btnLang:hover {
+    cursor: pointer;
+    background-color: #c2d3e3;
+}
+
+.btnLang.btnActive {
+    border-top: 3px #3770e3 solid;
+    background-color: rgb(210, 213, 220);
+}
+
+.highlightWrapper {
+    position: absolute;
+    width: 100%;
+    height: 370px;
+    top: 30px;
+    background-color: #2b2b2b;
+    overflow-y: scroll;
+    display: none;
+}
+
+.highlightWrapper.highlightActive {
+    display: block;
+}

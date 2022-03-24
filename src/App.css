@@ -1,18 +1,98 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Adobe Fan Heiti Std B", sans-serif;
+    font-family:  'Source Sans Pro', sans-serif;
 }
 
-.home,
-.resume,
-.integration {
+#page-container {
+    position: fixed;
+    right: 0;
+    width: calc(100vw - 250px);
+    height: calc(100vh - 70px);
+    background-color: #ffffff;
+    overflow-y: scroll;
+    padding: 0 0 0 50px;
+}
+
+#page-container .article-wrap {
+    width: 1000px;
+    /*background: #73807a;*/
+}
+
+h1 {
     display: flex;
-    height: 90vh;
     align-items: center;
-    justify-content: center;
     font-size: 3rem;
+    margin: 50px 0px 0 0;
+}
+
+p {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    margin: 10px 0px 0 0;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    margin: 10px 0px 0 0;
+}
+
+h3 {
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 10px 0;
+}
+
+ol {
+    padding: 0 0 0 20px;
+    counter-reset: item
+}
+
+ol.headers-ol {
+    counter-reset: chapter-count;
+    padding: 0;
+}
+
+ol li {
+    display: block;
+}
+
+ol li:before {
+    content: counters(item, ".") " ";
+    counter-increment: item
+}
+
+.react-pdf__Page__canvas {
+    margin: 20px 25%;
+}
+
+.react-pdf__Page__textContent {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.fixed-box {
+    background-color: rgb(248, 248, 248);
+    /*border: #3770e3 1px solid;*/
+    min-width: 300px;
+    position: fixed;
+    padding: 5px;
+    top: 40vh;
+    left: 1300px;
+    -webkit-box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.39);
+    box-shadow: 0px 0px 13px 5px rgba(0,0,0,0.10);
+}
+
+.fixed-box input {
 }

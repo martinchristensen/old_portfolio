@@ -16,7 +16,7 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
-        title: 'Integration',
+        title: 'Numerical Integration',
         path: '/integration',
         icon: <VscGraphLine />,
         cName: 'nav-text'

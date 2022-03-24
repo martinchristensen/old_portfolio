@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {FaBars} from "react-icons/fa";
-import {Link} from "react-router-dom";
-import {AiOutlineClose} from "react-icons/ai";
+import {Link, useLocation} from "react-router-dom";
 import {SidebarData} from "./sidebarData";
 import './navbar.css';
 import {IconContext} from "react-icons";
@@ -9,12 +8,14 @@ import {IconContext} from "react-icons";
 
 const Navbar = () => {
     const [sidebar, setSidebar] = useState(true)
+    const [activeLink, setActiveLink] = useState(false)
 
+    const location = useLocation();
     const showSidebar = () => setSidebar(!sidebar)
 
     return (
         <>
-            <IconContext.Provider value={{ color: '#fff'}}>
+            <IconContext.Provider value={{ color: '#123856'}}>
                 <div className={"navbar"}>
                     <Link to={"#"} className={"menu-bars"} onClick={showSidebar}>
                         <FaBars/>
@@ -22,14 +23,9 @@ const Navbar = () => {
                 </div>
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className={'nav-menu-items'}>
-                        <li className={"navbar-toggle"}>
-                            <Link to={"#"} className={"menu-bars"} onClick={showSidebar}>
-                                <AiOutlineClose />
-                            </Link>
-                        </li>
                         {SidebarData.map((item, index) => {
                             return (
-                                <li key={index} className={item.cName}>
+                                <li key={index} className={item.path === location.pathname ? item.cName + " active" : item.cName}>
                                     <Link to={item.path}>
                                         {item.icon}
                                         <span>{item.title}</span>
@@ -40,7 +36,6 @@ const Navbar = () => {
                     </ul>
                 </nav>
             </IconContext.Provider>
-
         </>
     );
 };
