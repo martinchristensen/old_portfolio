@@ -11,8 +11,7 @@ export const Implementations = [
                      } else {
                        xi += h;
                      }
-                     let yi = expression(xi);
-                     result += yi * h;
+                     result += expression(xi) * h;
                    }
               return result;
         }`,
