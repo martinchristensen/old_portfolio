@@ -41,9 +41,9 @@ const IntRectangleM = (props) => {
             <VictoryLabel text={""} x={225} y={30} textAnchor="middle" />
             <VictoryBar
               labels={({ datum }) =>
-                "y: " +
+                "yi: " +
                 datum.y.toFixed(5) +
-                "\nx: " +
+                "\nxi: " +
                 datum.x.toFixed(5) +
                 "\narea: " +
                 (datum.y * h).toFixed(5)

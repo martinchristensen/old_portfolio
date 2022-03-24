@@ -28,7 +28,7 @@ const Navbar = () => {
                                 <li key={index} className={item.path === location.pathname ? item.cName + " active" : item.cName}>
                                     <Link to={item.path}>
                                         {item.icon}
-                                        <span>{item.title}</span>
+                                        <span className={"nav-span"}>{item.title}</span>
                                     </Link>
                                 </li>
                             )

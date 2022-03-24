@@ -48,8 +48,7 @@ const Integration = () => {
         <IntRectangleM expression={expression} a={a} b={b} N={N} />{" "}
         {/*eval() is bad practice. Look up XPath*/}
         <h3>
-          1.2 Implementation (I know the indentation in the box is a little
-          weird... I'm working on it.):
+          1.2 Implementation:
         </h3>
         <CodeBox codeData={Implementations} codeName={"Extended-Midpoint"} />
         <h2>2 Trapezoidal Method</h2>

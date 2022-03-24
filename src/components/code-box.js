@@ -6,19 +6,24 @@ const CodeBox = (Props) => {
     const [selected, setSelected] = useState(0)
 
     const data = Props.codeData
+
+    const handleSelect = (e, index) => {
+        setSelected(index);
+        e.stopPropagation()
+    }
     return (
         <>
             <div className={"codeBox"}>
                 {data.filter(item => item.name === Props.codeName).map((items, index) => {
                     return (
-                        <>
-                        <button key={items.key} className={index === selected ? "btnLang btnActive" : "btnLang"} onClick={e => {setSelected(index)}}>{items.lang}</button>
-                        <div key={items.key} className={index === selected ? "highlightWrapper highlightActive" : "highlightWrapper"}>
-                            <Highlight language="c++">
-                                {items.code}
-                            </Highlight>
+                        <div key={index.toString()+"IAmUnique"}>
+                            <button className={index === selected ? "btnLang btnActive" : "btnLang"} onClick={ e => handleSelect(e, index)}>{items.lang}</button>
+                            <div className={index === selected ? "highlightWrapper highlightActive" : "highlightWrapper"}>
+                                <Highlight className={items.lang} language={items.lang}>
+                                    {items.code}
+                                </Highlight>
+                            </div>
                         </div>
-                        </>
                     )
                 })}
             </div>
@@ -27,3 +32,5 @@ const CodeBox = (Props) => {
 };
 
 export default CodeBox;
+
+// onClick={e => {setSelected(index)}}
