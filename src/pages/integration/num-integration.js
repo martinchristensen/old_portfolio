@@ -46,7 +46,7 @@ const IntRectangleM = (props) => {
                 "\nxi: " +
                 datum.x.toFixed(5) +
                 "\narea: " +
-                (datum.y * h).toFixed(5)
+                (Math.abs(datum.y * h)).toFixed(5)
               }
               labelComponent={
                 <VictoryTooltip
