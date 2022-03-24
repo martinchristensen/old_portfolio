@@ -26,7 +26,6 @@ export const Implementations = [
     lang: "javascript",
     code: `function intTrapezoidalM(expression, a, b, N) {
               const h = (b - a) / (N-1);
-              const data = [];
               //x_0
               let xi = a;
               let yi = expression(xi)/2;

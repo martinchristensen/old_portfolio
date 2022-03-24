@@ -7,7 +7,7 @@ const IntegrateBox = ({ expressionToParent }) => {
     const [expression, setExpression] = useState("sin(x^2+1)+2");
     const [a, setA] = useState(1);
     const [b, setB] = useState(3);
-    const [N, setN] = useState(5);
+    const [N, setN] = useState(10);
 
     const toParent = e => {
         expressionToParent(mathType2scriptStr(expression), a, b, N)

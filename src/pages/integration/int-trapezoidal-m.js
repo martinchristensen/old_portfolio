@@ -63,9 +63,7 @@ const IntTrapezoidalM = (props) => {
                                 "yi: " +
                                 datum.y.toFixed(5) +
                                 "\nxi: " +
-                                datum.x.toFixed(5) +
-                                "\narea: " +
-                                (Math.abs(datum.y * h)).toFixed(5)
+                                datum.x.toFixed(5)
                             }
                             labelComponent={
                                 <VictoryTooltip

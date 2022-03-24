@@ -10,7 +10,7 @@ const Integration = () => {
   const [expression, setExpression] = useState("Math.sin(x**2+1)+2");
   const [a, setA] = useState(1);
   const [b, setB] = useState(3);
-  const [N, setN] = useState(5);
+  const [N, setN] = useState(10);
 
   const expressionCallback = (newExpression, newA, newB, newN) => {
     setExpression(newExpression);
@@ -33,12 +33,24 @@ const Integration = () => {
           <li>
             Extended Midpoint (Rectangle) Method
             <ol>
-              <li>Example</li>
+              <li>Showcase</li>
               <li>Implementation</li>
             </ol>
           </li>
-          <li>Trapezoidal Method</li>
-          <li>Simpson's Method</li>
+          <li>
+            Trapezoidal Method
+            <ol>
+              <li>Showcase</li>
+              <li>Implementation</li>
+            </ol>
+          </li>
+          <li>
+            Simpson's Method
+            <ol>
+              <li>Showcase</li>
+              <li>Implementation</li>
+            </ol>
+          </li>
         </ol>
 
         <h2>1 Extended Midpoint (Rectangle) Method</h2>
@@ -51,7 +63,7 @@ const Integration = () => {
         <h2>2 Trapezoidal Method</h2>
         <h3>2.1 Implementation</h3>
         <IntTrapezoidalM expression={expression} a={a} b={b} N={N} />
-        <h3>2.2 Implementatiuon</h3>
+        <h3>2.2 Implementation</h3>
         <CodeBox codeData={Implementations} codeName={"Trapezoidal"}/>
 
         <h2>3 Simpson's Method</h2>

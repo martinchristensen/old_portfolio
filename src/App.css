@@ -18,7 +18,7 @@
 }
 
 #page-container .article-wrap {
-    width: 1000px;
+    max-width: 1000px;
     /*background: #73807a;*/
 }
 
