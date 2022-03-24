@@ -61,8 +61,7 @@ const IntRectangleM = (props) => {
               data={result[1]}
               x={"x"}
               y={"y"}
-              barWidth={({ x }) => h*175}
-              // barRatio={1.25}
+              barRatio={1.25}
               style={{ data: { fill: "#3770e3"} }}
               events={[
                 {
