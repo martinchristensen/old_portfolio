@@ -22,4 +22,27 @@ export const Implementations = [
     code: `// Coming soon ;)`,
     name: "Extended-Midpoint",
   },
+  {
+    lang: "javascript",
+    code: `function intTrapezoidalM(expression, a, b, N) {
+              const h = (b - a) / (N-1);
+              const data = [];
+              //x_0
+              let xi = a;
+              let yi = expression(xi)/2;
+              let result = h*yi;
+              //x_1 to x_N-2
+              for (let i = 1; i <= N - 2; i++) {
+                  xi += h;
+                  yi = expression(xi);
+                  result += yi * h;
+              }
+              //x_N-1
+              xi += h;
+              yi = expression(xi)/2
+              result += h*yi
+              return result;
+          }`,
+    name: "Trapezoidal",
+  },
 ];

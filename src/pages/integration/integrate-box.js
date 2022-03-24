@@ -4,10 +4,10 @@ import {scriptStr2Tex} from "../../components/scriptStr2Tex";
 import {mathType2scriptStr} from "../../components/mathType2scriptStr";
 
 const IntegrateBox = ({ expressionToParent }) => {
-    const [expression, setExpression] = useState("2*x+2");
+    const [expression, setExpression] = useState("sin(x^2+1)+2");
     const [a, setA] = useState(1);
     const [b, setB] = useState(3);
-    const [N, setN] = useState(50);
+    const [N, setN] = useState(5);
 
     const toParent = e => {
         expressionToParent(mathType2scriptStr(expression), a, b, N)
@@ -17,7 +17,7 @@ const IntegrateBox = ({ expressionToParent }) => {
     return (
         <>
         <div className={"fixed-box"}>
-            <p style={{flexDirection: "column-reverse"}}> Change the showcase here</p>
+            <p style={{flexDirection: "column-reverse"}}> Change the showcases here</p>
             <table>
                 <tbody>
                     <tr>
@@ -38,7 +38,7 @@ const IntegrateBox = ({ expressionToParent }) => {
                     <tr>
                         <td> </td>
                         <td><MathComponent tex={"N="} /></td>
-                        <td><input type="number" min={2} value={N} onChange={e => setN(e.target.value)}/></td>
+                        <td><input type="number" min={2} max={1000} value={N} onChange={e => setN(e.target.value)}/></td>
                     </tr>
                 </tbody>
             </table>

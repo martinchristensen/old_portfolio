@@ -2,7 +2,7 @@ import {
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictoryLabel,
+  VictoryLabel, VictoryLine,
   VictoryTooltip,
 } from "victory";
 import { MathComponent } from "mathjax-react";
@@ -19,14 +19,14 @@ const IntRectangleM = (props) => {
       props.b,
       props.N
     );
-    const h = (props.b - props.a) / props.N;
+    const h = (props.b - props.a) / (props.N-1);
     const texSum =
       h.toFixed(3) +
       "\\sum_{i = 1}^{" +
       (props.N - 1) +
-      "}" +
+      "}\\left[" +
       scriptStr2Tex(props.expression) +
-      "=" +
+      "\\right]=" +
       result[0].toFixed(3);
     const texError =
       "\\mathcal{O} \\left( \\frac{1}" + "{" + props.N ** 2 + "} \\right)";
@@ -36,7 +36,7 @@ const IntRectangleM = (props) => {
         <div style={{ display: "flex", flexWrap: "wrap", maxWidth: 900 }}>
           <VictoryChart
             domainPadding={{ x: 0 }}
-            domain={{ x: [props.a, props.b + h] }}
+            domain={{ x: [props.a, props.b] }}
           >
             <VictoryLabel text={""} x={225} y={30} textAnchor="middle" />
             <VictoryBar
@@ -61,9 +61,9 @@ const IntRectangleM = (props) => {
               data={result[1]}
               x={"x"}
               y={"y"}
-              // barWidth={({ index }) => 350/ props.N}
-              barRatio={1.25}
-              style={{ data: { fill: "#3770e3" } }}
+              barWidth={({ x }) => h*175}
+              // barRatio={1.25}
+              style={{ data: { fill: "#3770e3"} }}
               events={[
                 {
                   target: "data",
@@ -98,6 +98,13 @@ const IntRectangleM = (props) => {
                 },
               ]}
             />
+            <VictoryLine
+                samples={2000}
+                style={{data:
+                      {stroke: "red", strokeWidth: 1}
+                }}
+                y={(data) => eval(props.expression.replaceAll("x", "data.x"))}
+            />
             <VictoryAxis label={"x"} style={{ axisLabel: { fontSize: 10 } }} />
             <VictoryAxis
               dependentAxis
@@ -107,11 +114,14 @@ const IntRectangleM = (props) => {
             />
           </VictoryChart>
         </div>
-        <p style={{ margin: 0 }}>
-          {" "}
-          The integral is estimated to be: &nbsp; <MathComponent tex={texSum} />
-          &nbsp; with an error of &nbsp; <MathComponent tex={texError} />
+        <p>
+          The integral is estimated to be:
         </p>
+        <MathComponent tex={texSum} />
+        <p>
+          With an error of:
+        </p>
+        <MathComponent tex={texError} />
       </>
     );
   } catch (error) {
