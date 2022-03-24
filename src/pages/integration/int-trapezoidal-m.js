@@ -153,21 +153,21 @@ const IntTrapezoidalM = (props) => {
 };
 
 function intTrapezoidalM(expression, a, b, N) {
-    const h = (b - a) / (N-1);
+    const h = (b - a) / N;
     const data = [];
     //x_0
     let xi = a;
     let yi = expression(xi)/2;
     let result = h*yi;
     data.push({ x: xi, y: yi*2 });
-    //x_1 to x_N-2
-    for (let i = 1; i <= N - 2; i++) {
+    //x_1 to x_N-1
+    for (let i = 1; i <= N - 1; i++) {
         xi += h;
         yi = expression(xi);
         result += yi * h;
         data.push({ x: xi, y: yi });
     }
-    //x_N-1
+    //x_N
     xi += h;
     yi = expression(xi)/2
     result += h*yi

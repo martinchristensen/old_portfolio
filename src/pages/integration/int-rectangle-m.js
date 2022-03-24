@@ -25,7 +25,7 @@ const IntRectangleM = (props) => {
       "\\sum_{i = 1}^{" +
       (props.N - 1) +
       "}\\left[" +
-      scriptStr2Tex(props.expression) +
+      scriptStr2Tex(props.expression).replaceAll("x", "m") +
       "\\right]=" +
       result[0].toFixed(3);
     const texError =
@@ -43,7 +43,7 @@ const IntRectangleM = (props) => {
               labels={({ datum }) =>
                 "yi: " +
                 datum.y.toFixed(5) +
-                "\nxi: " +
+                "\nmi: " +
                 datum.x.toFixed(5) +
                 "\narea: " +
                 (Math.abs(datum.y * h)).toFixed(5)

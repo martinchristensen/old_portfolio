@@ -4,7 +4,7 @@ import IntegrateBox from "./integrate-box";
 import CodeBox from "../../components/code-box";
 import { Implementations } from "./implementations";
 import IntTrapezoidalM from "./int-trapezoidal-m";
-
+import IntSimpsonsM from "./int-simpsons-m";
 
 const Integration = () => {
   const [expression, setExpression] = useState("Math.sin(x**2+1)+2");
@@ -26,7 +26,16 @@ const Integration = () => {
         <p>
           In this section I will cover three methods to, approximates the value
           of a definite integral, introduced to me in my course on Numerical
-          Methods.
+          Methods. I will not be going into detail with any of the methods. But if
+          you aren't familiar with them and interested in learning more, I
+          recommend this resource: <a
+            target={"_blank"}
+            href={
+              "https://math.libretexts.org/Courses/Mount_Royal_University/MATH_2200%3A_Calculus_for_Scientists_II/2%3A_Techniques_of_Integration/2.5%3A_Numerical_Integration_-_Midpoint%2C_Trapezoid%2C_Simpson's_rule"
+            }
+        >
+          math.libretexts.org
+        </a>.
         </p>
         <h2>Contents</h2>
         <ol>
@@ -61,16 +70,16 @@ const Integration = () => {
         <CodeBox codeData={Implementations} codeName={"Extended-Midpoint"} />
 
         <h2>2 Trapezoidal Method</h2>
+        <a href={"https://math24.net/trapezoidal-rule.html"}>Resource</a>
         <h3>2.1 Implementation</h3>
         <IntTrapezoidalM expression={expression} a={a} b={b} N={N} />
         <h3>2.2 Implementation</h3>
-        <CodeBox codeData={Implementations} codeName={"Trapezoidal"}/>
+        <CodeBox codeData={Implementations} codeName={"Trapezoidal"} />
 
         <h2>3 Simpson's Method</h2>
-        <p>
-          I haven't implemented this method yet. But it will be here soon
-          enough.
-        </p>
+        <a href={"https://math24.net/simpsons-rule.html#example1"}>Resource</a>
+        <h3>3.1 Implementation</h3>
+        <IntSimpsonsM expression={expression} a={a} b={b} N={N} />
       </div>
       <IntegrateBox expressionToParent={expressionCallback} />
     </div>
