@@ -19,9 +19,9 @@ const IntSimpsonsM = (props) => {
             "\\left(" + (result[1][0]["y"]/2).toFixed(2) + "+" +
             "\\sum_{i = 1}^{" +
             (props.N - 2) +
-            "}\\left[c_i\\cdot" +
+            "}\\left[c_i \\left( \\cdot" +
             scriptStr2Tex(props.expression) +
-            "\\right] + " + (result[1][result[1].length -1 ]["y"]/2).toFixed(2) + "\\right)=" +
+            "\\right) \\right] + " + (result[1][result[1].length -1 ]["y"]/2).toFixed(2) + "\\right)=" +
             result[0].toFixed(3) +
             "\\quad \\text{where}\\; c_i=" +
             "\\bigg\\{\\begin{array}{lr}\n" +
