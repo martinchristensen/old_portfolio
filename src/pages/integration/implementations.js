@@ -65,6 +65,6 @@ export const Implementations = [
               result += expression(xi)
               return [result * (h/3), data];
            }`,
-    name: "Simpson's",
+    name: "Simpsons",
   },
 ];

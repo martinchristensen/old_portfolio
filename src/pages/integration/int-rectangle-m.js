@@ -1,8 +1,9 @@
 import {
+  VictoryArea,
   VictoryAxis,
   VictoryBar,
   VictoryChart,
-  VictoryLabel, VictoryLine,
+  VictoryLabel, VictoryLine, VictoryScatter,
   VictoryTooltip,
 } from "victory";
 import { MathComponent } from "mathjax-react";
@@ -39,6 +40,12 @@ const IntRectangleM = (props) => {
             domain={{ x: [props.a, props.b] }}
           >
             <VictoryLabel text={""} x={225} y={30} textAnchor="middle" />
+            <VictoryArea
+                style={{ data: { fill: "#638fde" }}}
+                data={result[2]}
+                x={"x"}
+                y={"y"}
+            />
             <VictoryBar
               labels={({ datum }) =>
                 "yi: " +
@@ -61,7 +68,7 @@ const IntRectangleM = (props) => {
               data={result[1]}
               x={"x"}
               y={"y"}
-              barRatio={1.25}
+              barRatio={0.01}
               style={{ data: { fill: "#3770e3"} }}
               events={[
                 {
@@ -139,18 +146,26 @@ function intRectangleM(expression, a, b, N) {
   const h = (b - a) / (N - 1);
   let result = 0;
   const data = [];
-  let xi = a;
+  const bars = [];
+  let mi = a;
+  let xi = mi;
+  bars.push({x: xi, y: expression(xi + h/2)})
   for (let i = 0; i < N - 1; i++) {
     if (i === 0) {
-      xi += h / 2;
+      mi += h / 2;
     } else {
-      xi += h;
+      mi += h;
     }
-    const yi = expression(xi);
+    const yi = expression(mi);
     result += yi * h;
-    data.push({ x: xi, y: yi });
+    data.push({ x: mi, y: yi });
+
+    xi += h;
+    bars.push({x: xi, y: expression(mi)})
+    bars.push({x: xi, y: expression(mi + h)
+  })
   }
-  return [result, data];
+  return [result, data, bars];
 }
 
 export default IntRectangleM;

@@ -62,6 +62,7 @@ const Integration = () => {
           </li>
         </ol>
 
+
         <h2>1 Extended Midpoint (Rectangle) Method</h2>
         <h3>1.1 Showcase</h3>
         <IntRectangleM expression={expression} a={a} b={b} N={N} />
@@ -69,17 +70,23 @@ const Integration = () => {
         <h3> 1.2 Implementation:</h3>
         <CodeBox codeData={Implementations} codeName={"Extended-Midpoint"} />
 
+
         <h2>2 Trapezoidal Method</h2>
         <a href={"https://math24.net/trapezoidal-rule.html"}>Resource</a>
-        <h3>2.1 Implementation</h3>
+
+        <h3>2.1 Showcase</h3>
         <IntTrapezoidalM expression={expression} a={a} b={b} N={N} />
+
         <h3>2.2 Implementation</h3>
         <CodeBox codeData={Implementations} codeName={"Trapezoidal"} />
 
         <h2>3 Simpson's Method</h2>
         <a href={"https://math24.net/simpsons-rule.html#example1"}>Resource</a>
-        <h3>3.1 Implementation</h3>
+
+        <h3>3.1 Showcase</h3>
         <IntSimpsonsM expression={expression} a={a} b={b} N={N} />
+        <h3>3.2 Implementation</h3>
+        <CodeBox codeData={Implementations} codeName={"Simpsons"}/>
       </div>
       <IntegrateBox expressionToParent={expressionCallback} />
     </div>
