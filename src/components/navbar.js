@@ -6,12 +6,22 @@ import './navbar.css';
 import {IconContext} from "react-icons";
 
 
-const Navbar = () => {
-    const [sidebar, setSidebar] = useState(true)
+const Navbar = (props) => {
+    const [sidebar, setSidebar] = useState(!props.initialSidebar)
     const [activeLink, setActiveLink] = useState(false)
 
     const location = useLocation();
-    const showSidebar = () => setSidebar(!sidebar)
+    const showSidebar = () => {
+            setSidebar(!sidebar);
+            props.expandHandler();
+    }
+
+    const clickLink = (e) => {
+        if (window.innerWidth <= 600) {
+            showSidebar();
+        }
+        e.stopPropagation();
+    }
 
     return (
         <>
@@ -26,7 +36,7 @@ const Navbar = () => {
                         {SidebarData.map((item, index) => {
                             return (
                                 <li key={index} className={item.path === location.pathname ? item.cName + " active" : item.cName}>
-                                    <Link to={item.path}>
+                                    <Link to={item.path} onClick={e => clickLink(e)}>
                                         {item.icon}
                                         <span className={"nav-span"}>{item.title}</span>
                                     </Link>

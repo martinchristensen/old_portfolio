@@ -20,7 +20,7 @@ const Integration = () => {
   };
 
   return (
-    <div className={"integration"} id={"page-container"}>
+    <>
       <div className={"article-wrap"}>
         <h1>Numerical Integration</h1>
         <p>
@@ -89,7 +89,7 @@ const Integration = () => {
         <CodeBox codeData={Implementations} codeName={"Simpsons"}/>
       </div>
       <IntegrateBox expressionToParent={expressionCallback} />
-    </div>
+    </>
   );
 };
 
