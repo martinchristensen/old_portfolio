@@ -7,7 +7,7 @@ import Integration from './pages/integration';
 import Resume from './pages/resume';
 
 function App() {
-    const [expand, setExpand] = useState(false);
+    const [expand, setExpand] = useState(window.innerWidth < 600);
 
   const handler = () => {
       setExpand(!expand)

@@ -205,4 +205,14 @@ ol li:before {
     #page-container.expanded {
         width: 100vw;
     }
+
+    .fixed-box {
+        right: 0;
+    }
+
+    /*-------------Scrollbar------------*/
+    /* width */
+    #page-container::-webkit-scrollbar {
+        width: 0;
+    }
 }

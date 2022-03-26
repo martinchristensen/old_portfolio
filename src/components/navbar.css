@@ -3,16 +3,54 @@
     height: 56px;
     display: flex;
     justify-content: start;
-    align-items: center;
+    /*align-items: center;*/
     border-top: 5px #3770e3 solid;
     border-bottom: 1px #e1e1e1 solid;
+    position: relative;
 }
 
 .menu-bars {
-    margin-left: 2rem;
+    margin-left: 0.25rem;
     font-size: 2rem;
-    display: unset;
     background: none;
+    margin-top: auto;
+}
+
+.menu-logo {
+    margin-left: 13.25rem;
+    transition: 250ms;
+}
+
+.logo-go-left {
+    margin-left: 1rem;
+    transition: 250ms;
+}
+
+.menu-m-logo {
+    position: relative;
+}
+
+.menu-logo:hover .menu-ch-logo {
+    margin-left: 0;
+    transition: 500ms;
+}
+
+.menu-ch-logo {
+    margin-left: -0.5rem;
+    transition: 500ms;
+}
+
+.contact-links {
+    float: right;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    right: 10px;
+}
+
+.contact-link {
+    font-size: 2.1rem;
+    margin: auto 1.5rem 0 0;
 }
 
 .nav-menu {
@@ -71,7 +109,9 @@
 
 @media only screen and (max-width: 768px) {
     /* For tablets: */
-
+    .menu-logo {
+        margin-left: 1rem;
+    }
 }
 
 
