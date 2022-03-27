@@ -13,9 +13,22 @@ export default function Model({ ...props }) {
 
   const [baseRot, setBaseRot] = useState(0)
 
+  const baseAngle = (x,y) => {
+    if (x >= 0) {
+      return Math.atan(y / x)
+    }
+    if (x < 0) {
+      return Math.PI - Math.atan(-y / x)
+    }
+    else
+    {
+      return 0;
+    }
+  }
+
   useFrame((state) => {
-    const baseAngle = ()  => {return (-Math.PI/2 + Math.PI*state.mouse.x /2)};
-    setBaseRot(baseAngle);
+
+    setBaseRot(baseAngle(state.mouse.x, state.mouse.y));
   });
 
   return (
