@@ -6,7 +6,7 @@ import {Canvas} from "@react-three/fiber";
 const Home = () => {
 
     return (
-        <Canvas className={"full-size-canvas"} >
+        <Canvas className={"full-size-canvas"} shadows={true}>
             <ThreeScene />
         </Canvas>
     );
