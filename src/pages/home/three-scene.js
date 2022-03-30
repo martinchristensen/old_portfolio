@@ -1,12 +1,32 @@
-import React, {Suspense, useEffect, useRef} from 'react';
-import {Environment, OrbitControls, PerspectiveCamera} from "@react-three/drei";
+    import React, {Suspense, useEffect, useRef, useState} from 'react';
+import {OrbitControls, PerspectiveCamera} from "@react-three/drei";
 import RobotArm from "./robot-arm";
-import Floor from "./Floor";
-import * as THREE from "three"
+import Floor from "./floor";
+import AboutBox from "./about-box";
+import BgPlane from "./bg-plane";
+import {useFrame} from "@react-three/fiber";
 
-const ThreeScene = () => {
+const ThreeScene = ({pointer}) => {
     const camerasRef = useRef(null);
+    const camPos = [0, 2, 18];
+    const [workspace, setWorkspace] = useState()
+    const [pointAtAbout, setPointAtAbout] = useState(false);
+    const [cube, setCube] = useState(null);
 
+    const selectCube = (cubeName) => {
+        if(cube===null) {
+            setCube(cubeName)
+        }
+    }
+
+    const workRay = (ray) => {
+        setWorkspace(ray);
+    }
+
+    const mouseHoverAbout = (e) => {
+      setPointAtAbout(e);
+      pointer(e, cube);
+    }
 
     useEffect(() => {
         if(camerasRef.current) {
@@ -14,18 +34,26 @@ const ThreeScene = () => {
         }
     }, [camerasRef.current])
 
+    useFrame( (state) => {
+    });
+
     return (
         <>
-            <PerspectiveCamera ref={camerasRef} makeDefault position={[0, 9, 7]} rotation={[-0.95,0,0]} zoom={0.35}/>
+            <PerspectiveCamera ref={camerasRef} makeDefault position={camPos} rotation={[0,0,0]} zoom={1}/>
             <Suspense fallback={null}>
-                <RobotArm scale={0.5} position={[0, 0, 0]} rotation={[0,Math.PI,0]} castShadow={true}/>
+                {/*<OrbitControls/>*/}
+                <RobotArm scale={0.5} position={[0, 0, 0]} rotation={[0,Math.PI,0]} castShadow={true}
+                ray = {workspace}
+                hoverAbout ={pointAtAbout}
+                selected = {cube}
+                />
                 <Floor />
-                {/*<Environment background>*/}
-                {/*    <mesh scale={100}>*/}
-                {/*        <sphereGeometry args={[1, 64, 64]} />*/}
-                {/*        <meshBasicMaterial side={THREE.BackSide} color={"#0348d0"} />*/}
-                {/*    </mesh>*/}
-                {/*</Environment>*/}
+                <AboutBox mouseHover={mouseHoverAbout} select={selectCube} />
+                <BgPlane />
+                <mesh scale={1}  onPointerMove={(e) => workRay(e.ray)}>
+                    <sphereGeometry args={[6.25, 32, 16]}  />
+                    <meshBasicMaterial color={"#000000"} wireframe />
+                </mesh>
             </Suspense>
             <ambientLight args={["#ffffff", 0.25]} />
             <spotLight args={["#ffffff", 1]} position={[-15, 15, 5]} intensity={0.5} penumbra={0.5} angle={0.5} castShadow={true} />

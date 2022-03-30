@@ -10,25 +10,98 @@ export default function Model({ ...props }) {
   const group = useRef()
   const { nodes, materials } = useGLTF('/robot-arm.glb')
 
+  const base = React.useRef();
+  const lowerArm = React.useRef();
+  const upperArm = React.useRef();
 
-  const [baseRot, setBaseRot] = useState(0)
+  const tcp = React.useRef();
 
-  const baseAngle = (x,y) => {
-    if (x >= 0) {
-      return Math.atan(y / x)
-    }
-    if (x < 0) {
-      return Math.PI - Math.atan(-y / x)
-    }
-    else
-    {
-      return 0;
+  const claw1 = React.useRef();
+  const claw2 = React.useRef();
+  const claw3 = React.useRef();
+  const claw4 = React.useRef();
+
+
+  const baseAngle = () => {
+    if (props.ray !== undefined) {
+      const direction = props.ray['direction'];
+      const x = direction['x'];
+      // setBaseRot( -Math.PI/2 + Math.atan(x*6.25) / 2 )
+      base.current.rotation.y = -Math.PI/2 + Math.atan(x*6.25) / 2;
     }
   }
 
-  useFrame((state) => {
+  const lowerArmAngle = (y) => {
+    if(0 < y) {
+      if (y < 0.5) {
+        return -Math.PI * Math.abs(y) / 8;
+      }
+      else {
+        return -Math.PI * 0.5 / 8;
+      }
+    }
+    else {
+      return 0
+    }
+  }
 
-    setBaseRot(baseAngle(state.mouse.x, state.mouse.y));
+  const upperArmAngle = (y) => {
+    if (0.5 <= y) {
+      return -Math.PI * Math.abs(y-0.5) / 4;
+    }
+    else {
+      return 0
+    }
+  }
+
+  const animateToAboutCube = () => {
+    // Align base
+    const cubeAtAngle = -2.1;
+    if (base.current.rotation.y < cubeAtAngle) {
+      base.current.rotation.y += 0.005;
+    }
+    if (base.current.rotation.y > cubeAtAngle) {
+      base.current.rotation.y -= 0.005;
+    }
+    // Go down
+    if (lowerArm.current.rotation.z > -0.2) {
+      lowerArm.current.rotation.z -= 0.01
+    }
+    if (upperArm.current.rotation.z < 0.65) {
+      upperArm.current.rotation.z += 0.01
+    }
+    if (tcp.current.rotation.z > 0.98) {
+      tcp.current.rotation.z -= 0.01;
+    }
+  }
+
+  const animateGripper = () => {
+    const speed = 0.03;
+    if (props.hoverAbout) {
+      if(claw1.current.rotation.y < 2)
+      {
+        claw1.current.rotation.y += speed;
+        claw2.current.rotation.y += speed;
+        claw3.current.rotation.y += speed;
+        claw4.current.rotation.y -= speed;
+      }
+    }
+    else if (1.44 < claw1.current.rotation.y) {
+      claw1.current.rotation.y -= speed;
+      claw2.current.rotation.y -= speed;
+      claw3.current.rotation.y -= speed;
+      claw4.current.rotation.y += speed;
+    }
+  }
+
+  useFrame((state, {clock}) => {
+    if (props.selected === null) {
+      baseAngle();
+      animateGripper();
+    }
+    else {
+      animateToAboutCube();
+    }
   });
 
   return (
@@ -38,23 +111,28 @@ export default function Model({ ...props }) {
           <group castShadow={true}>
             <group rotation={[Math.PI / 2, 0, 0]} castShadow={true}>
               <group castShadow={true}>
-                <group position={[0, 1.78, 0]} rotation={[0, baseRot, 0]} castShadow={true}> {/*Rotate base here*/}
-                  <group position={[0.7, 2.68, 0.28]} rotation={[0, 0, -0.01]} castShadow={true}>
-                    <group position={[-0.02, 6.15, -1.13]} rotation={[0, 0, 0.01]} castShadow={true}>
-                      <group position={[-12.2, 2.01, 0.74]} rotation={[0, 0, 1.57]} castShadow={true}>
-                        <group position={[-3.39, 1.77, 0]} rotation={[-1.57, 1.43, 0]} castShadow={true}>
+                <group position={[0, 1.78, 0]} rotation={[0, 0, 0]} castShadow={true} ref={base}> {/*base*/}
+                  <group position={[0.7, 2.68, 0.28]} rotation={[0, 0, 0]} castShadow={true} ref={lowerArm}> {/*firstJoint*/}
+                    <group position={[-0.02, 6.15, -1.13]} rotation={[0, 0, 0]} castShadow={true} ref={upperArm}> {/*secondJoint*/}
+                      {/*TCP z-DEFEAULT: Math.PI/2 */}
+                      <group position={[-12.2, 2.01, 0.74]} rotation={[0, 0, Math.PI/2]} castShadow={true} ref={tcp}> {/*TCP*/}
+                        <mesh scale={1} position={[-3.39, 1, 0]}>
+                          <boxBufferGeometry args={[30, 0.1, 0.1]}/>
+                          <meshBasicMaterial color={"#fd0404"} visible={true}/>
+                        </mesh>
+                        <group position={[-3.39, 1.77, 0]} rotation={[-1.57, 1.44, 0]} castShadow={true} ref={claw1}>
                           <mesh geometry={nodes.Object_22.geometry} material={nodes.Object_22.material}  castShadow={true} />
                           <mesh geometry={nodes.Object_23.geometry} material={nodes.Object_23.material} castShadow={true} />
                         </group>
-                        <group position={[-3.38, 0.94, 0.83]} rotation={[-0.02, 1.44, 0.02]} castShadow={true}>
+                        <group position={[-3.38, 0.94, 0.83]} rotation={[-0.02, 1.44, 0.02]} castShadow={true} ref={claw2}>
                           <mesh geometry={nodes.Object_25.geometry} material={nodes.Object_25.material} castShadow={true} />
                           <mesh geometry={nodes.Object_26.geometry} material={nodes.Object_26.material} castShadow={true} />
                         </group>
-                        <group position={[-3.38, 0.11, -0.01]} rotation={[1.57, 1.44, 0]} castShadow={true}>
+                        <group position={[-3.38, 0.11, -0.01]} rotation={[1.57, 1.44, 0]} castShadow={true} ref={claw3}>
                           <mesh geometry={nodes.Object_28.geometry} material={nodes.Object_28.material} castShadow={true} />
                           <mesh geometry={nodes.Object_29.geometry} material={nodes.Object_29.material} castShadow={true} />
                         </group>
-                        <group name="zange4_10" position={[-3.33, 0.95, -0.81]} rotation={[0, 0, -1.57]} castShadow={true}>
+                        <group position={[-3.33, 0.95, -0.81]} rotation={[0, 0, -1.57]} castShadow={true} ref={claw4}>
                           <mesh geometry={nodes.Object_31.geometry} material={nodes.Object_31.material} castShadow={true} />
                           <mesh geometry={nodes.Object_32.geometry} material={nodes.Object_32.material} castShadow={true} />
                         </group>

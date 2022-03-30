@@ -3,3 +3,7 @@
     height: 100%;
     position: absolute;
 }
+
+.full-size-canvas.pointer {
+    cursor: pointer;
+}
