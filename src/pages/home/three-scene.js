@@ -8,15 +8,20 @@ import {useFrame} from "@react-three/fiber";
 
 const ThreeScene = ({pointer}) => {
     const camerasRef = useRef(null);
-    const camPos = [0, 2, 18];
+    const camPos = [0, 2, 17];
     const [workspace, setWorkspace] = useState()
     const [pointAtAbout, setPointAtAbout] = useState(false);
     const [cube, setCube] = useState(null);
+    const [holdingAbout, setHoldingAbout] = useState(false)
 
     const selectCube = (cubeName) => {
         if(cube===null) {
             setCube(cubeName)
         }
+    }
+
+    const haveAboutBox = (e) => {
+        setHoldingAbout(e)
     }
 
     const workRay = (ray) => {
@@ -46,11 +51,12 @@ const ThreeScene = ({pointer}) => {
                 ray = {workspace}
                 hoverAbout ={pointAtAbout}
                 selected = {cube}
+                haveAboutBox={(e) => haveAboutBox(e)}
                 />
                 <Floor />
-                <AboutBox mouseHover={mouseHoverAbout} select={selectCube} />
+                <AboutBox mouseHover={mouseHoverAbout} select={selectCube} scale={1.5} position={[-3, 0.75, 5]} color={"#81da1c"} visible={!holdingAbout} />
                 <BgPlane />
-                <mesh scale={1}  onPointerMove={(e) => workRay(e.ray)}>
+                <mesh scale={1}  onPointerMove={(e) => workRay(e.ray)} visible={false}>
                     <sphereGeometry args={[6.25, 32, 16]}  />
                     <meshBasicMaterial color={"#000000"} wireframe />
                 </mesh>
