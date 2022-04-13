@@ -12,5 +12,7 @@ export function scriptStr2Tex (scriptStr, index_x = true)
     tex = tex.replaceAll("Math.asin", "\\asin");
     tex = tex.replaceAll("Math.acos", "\\acos");
     tex = tex.replaceAll("Math.atan", "\\atan");
+
+    tex = tex.replaceAll("Math.sqrt", "\\sqrt");
     return tex;
 }
