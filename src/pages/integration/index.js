@@ -5,6 +5,7 @@ import CodeBox from "../../components/code-box";
 import { Implementations } from "./implementations";
 import IntTrapezoidalM from "./int-trapezoidal-m";
 import IntSimpsonsM from "./int-simpsons-m";
+import {Article, Bread, Header, Section, TableOfContents} from "react-article";
 
 const Integration = () => {
   const [expression, setExpression] = useState("Math.sin(x**2+1)+2");
@@ -23,76 +24,82 @@ const Integration = () => {
     <>
       <div className={"article-wrapper"}>
         <div className={"article-content"}>
-          <h1>Numerical Integration</h1>
-          <p>
-            In this section I will cover three methods to, approximates the
-            value of a definite integral, introduced to me in my course on
-            Numerical Methods. I will not be going into detail with any of the
-            methods. But if you aren't familiar with them and interested in
-            learning more, I recommend this resource:{" "}
-            <a
-              target={"_blank"}
-              href={
-                "https://math.libretexts.org/Courses/Mount_Royal_University/MATH_2200%3A_Calculus_for_Scientists_II/2%3A_Techniques_of_Integration/2.5%3A_Numerical_Integration_-_Midpoint%2C_Trapezoid%2C_Simpson's_rule"
-              }
-            >
-              math.libretexts.org
-            </a>
-            .
-          </p>
-          <h2>Contents</h2>
-          <ol>
-            <li>
-              Extended Midpoint (Rectangle) Method
-              <ol>
-                <li>Showcase</li>
-                <li>Implementation</li>
-              </ol>
-            </li>
-            <li>
-              Trapezoidal Method
-              <ol>
-                <li>Showcase</li>
-                <li>Implementation</li>
-              </ol>
-            </li>
-            <li>
-              Simpson's Method
-              <ol>
-                <li>Showcase</li>
-                <li>Implementation</li>
-              </ol>
-            </li>
-          </ol>
-
-          <h2>1 Extended Midpoint (Rectangle) Method</h2>
-          <h3>1.1 Showcase</h3>
-          <IntRectangleM expression={expression} a={a} b={b} N={N} />
-          {/*eval() is bad practice. Look up XPath*/}
-          <h3> 1.2 Implementation:</h3>
-          <CodeBox codeData={Implementations} codeName={"Extended-Midpoint"} />
-
-          <h2>2 Trapezoidal Method</h2>
-          <a href={"https://math24.net/trapezoidal-rule.html"}>Resource</a>
-
-          <h3>2.1 Showcase</h3>
-          <IntTrapezoidalM expression={expression} a={a} b={b} N={N} />
-
-          <h3>2.2 Implementation</h3>
-          <CodeBox codeData={Implementations} codeName={"Trapezoidal"} />
-
-          <h2>3 Simpson's Method</h2>
-          <a href={"https://math24.net/simpsons-rule.html#example1"}>
-            Resource
-          </a>
-
-          <h3>3.1 Showcase</h3>
-          <IntSimpsonsM expression={expression} a={a} b={b} N={N} />
-          <h3>3.2 Implementation</h3>
-          <CodeBox codeData={Implementations} codeName={"Simpsons"} />
+          <Article>
+            <Header>Numerical Integration</Header>
+            <Bread className={"hello"}>
+              <p>
+                In this section I will cover three methods (Extended Midpoint, Trapezoidal and Simpson's) to, approximates the
+                value of a definite integral. I will not be going into detail with any of the
+                methods. But if you aren't familiar with them and interested in
+                learning more, I recommend this resource:{" "}
+                <a
+                    target={"_blank"}
+                    href={
+                      "https://math.libretexts.org/Courses/Mount_Royal_University/MATH_2200%3A_Calculus_for_Scientists_II/2%3A_Techniques_of_Integration/2.5%3A_Numerical_Integration_-_Midpoint%2C_Trapezoid%2C_Simpson's_rule"
+                    }
+                >
+                  math.libretexts.org
+                </a>
+                .
+              </p>
+            </Bread>
+            <TableOfContents text={"Table of Contents"} />
+            <Section>
+              <Header link={"em"}>Extended Midpoint (Rectangle) Method</Header>
+              <Section>
+                <Header link={"em-show"}>Showcase</Header>
+                <Bread>
+                  <IntRectangleM expression={expression} a={a} b={b} N={N} />
+                </Bread>
+              </Section>
+              <Section>
+                <Header link={"em-imp"}>Implementation</Header>
+                <Bread>
+                  <CodeBox codeData={Implementations} codeName={"Extended-Midpoint"} />
+                </Bread>
+              </Section>
+            </Section>
+            <Section>
+              <Header link={"tm"}>Trapezoidal Method</Header>
+              <Bread>
+                <a href={"https://math24.net/trapezoidal-rule.html"}>Resource</a>
+              </Bread>
+              <Section>
+                <Header link={"tm-show"}>Showcase</Header>
+                <Bread>
+                  <IntTrapezoidalM expression={expression} a={a} b={b} N={N} />
+                </Bread>
+              </Section>
+              <Section>
+                <Header link={"tm-imp"}>Implementation</Header>
+                <Bread>
+                  <CodeBox codeData={Implementations} codeName={"Trapezoidal"} />
+                </Bread>
+              </Section>
+            </Section>
+            <Section>
+              <Header link={"sm"}>Simpson's Method</Header>
+              <Bread>
+                <a href={"https://math24.net/simpsons-rule.html#example1"}>
+                  Resource
+                </a>
+              </Bread>
+              <Section>
+                <Header link={"sm-show"}>Showcase</Header>
+                <Bread>
+                  <IntSimpsonsM expression={expression} a={a} b={b} N={N} />
+                </Bread>
+              </Section>
+              <Section>
+                <Header link={"sm-imp"}>Implementation</Header>
+                <Bread>
+                  <CodeBox codeData={Implementations} codeName={"Simpsons"} />
+                </Bread>
+              </Section>
+            </Section>
+          </Article>
+          <IntegrateBox expressionToParent={expressionCallback} />
         </div>
-        <IntegrateBox expressionToParent={expressionCallback} />
-        <div className={"left-clear"} />
       </div>
     </>
   );

@@ -63,6 +63,18 @@
 .article-menu-right {
 }
 
+.react-article-table-of-contents ol li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.react-article-table-of-contents ol li a:hover {
+    color: #123856;
+    background-color: #dfdfe0;
+    padding: 0 0.2rem 0 0.3rem;
+    text-decoration: none;
+}
+
 /*---------Box for showcase manipulation-----------------*/
 .fixed-box {
     background-color: rgb(248, 248, 248);
