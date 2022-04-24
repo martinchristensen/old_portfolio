@@ -26,7 +26,7 @@ const Integration = () => {
         <div className={"article-content"}>
           <Article>
             <Header>Numerical Integration</Header>
-            <Bread className={"hello"}>
+            <Bread>
               <p>
                 In this section I will cover three methods (Extended Midpoint, Trapezoidal and Simpson's) to, approximates the
                 value of a definite integral. I will not be going into detail with any of the
@@ -45,53 +45,53 @@ const Integration = () => {
             </Bread>
             <TableOfContents text={"Table of Contents"} />
             <Section>
-              <Header link={"em"}>Extended Midpoint (Rectangle) Method</Header>
+              <Header id={"em"}>Extended Midpoint (Rectangle) Method</Header>
               <Section>
-                <Header link={"em-show"}>Showcase</Header>
+                <Header id={"em-show"}>Showcase</Header>
                 <Bread>
                   <IntRectangleM expression={expression} a={a} b={b} N={N} />
                 </Bread>
               </Section>
               <Section>
-                <Header link={"em-imp"}>Implementation</Header>
+                <Header id={"em-imp"}>Implementation</Header>
                 <Bread>
                   <CodeBox codeData={Implementations} codeName={"Extended-Midpoint"} />
                 </Bread>
               </Section>
             </Section>
             <Section>
-              <Header link={"tm"}>Trapezoidal Method</Header>
+              <Header id={"tm"}>Trapezoidal Method</Header>
               <Bread>
                 <a href={"https://math24.net/trapezoidal-rule.html"}>Resource</a>
               </Bread>
               <Section>
-                <Header link={"tm-show"}>Showcase</Header>
+                <Header id={"tm-show"}>Showcase</Header>
                 <Bread>
                   <IntTrapezoidalM expression={expression} a={a} b={b} N={N} />
                 </Bread>
               </Section>
               <Section>
-                <Header link={"tm-imp"}>Implementation</Header>
+                <Header id={"tm-imp"}>Implementation</Header>
                 <Bread>
                   <CodeBox codeData={Implementations} codeName={"Trapezoidal"} />
                 </Bread>
               </Section>
             </Section>
             <Section>
-              <Header link={"sm"}>Simpson's Method</Header>
+              <Header id={"sm"}>Simpson's Method</Header>
               <Bread>
                 <a href={"https://math24.net/simpsons-rule.html#example1"}>
                   Resource
                 </a>
               </Bread>
               <Section>
-                <Header link={"sm-show"}>Showcase</Header>
+                <Header id={"sm-show"}>Showcase</Header>
                 <Bread>
                   <IntSimpsonsM expression={expression} a={a} b={b} N={N} />
                 </Bread>
               </Section>
               <Section>
-                <Header link={"sm-imp"}>Implementation</Header>
+                <Header id={"sm-imp"}>Implementation</Header>
                 <Bread>
                   <CodeBox codeData={Implementations} codeName={"Simpsons"} />
                 </Bread>
