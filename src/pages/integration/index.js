@@ -28,7 +28,7 @@ const Integration = () => {
             <Header>Numerical Integration</Header>
             <Bread>
               <p>
-                In this section I will cover three methods (Extended Midpoint, Trapezoidal and Simpson's) to, approximates the
+                In this section I show three methods (Extended Midpoint, Trapezoidal and Simpson's) to, approximates the
                 value of a definite integral. I will not be going into detail with any of the
                 methods. But if you aren't familiar with them and interested in
                 learning more, I recommend this resource:{" "}
